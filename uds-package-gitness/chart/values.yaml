@@ -1,0 +1,7 @@
+postgres:
+  # Set to false to use external postgres
+  internal: true
+  selector:
+    cluster-name: pg-cluster
+  namespace: postgres
+  port: 5432

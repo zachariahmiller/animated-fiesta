@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: dev-secrets
+  version: "0.1.0"
+
+components:
+  - name: dependency-password
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: kubectl get secret -n gitness gitness.gitness.pg-cluster.credentials.postgresql.acid.zalan.do  --template={{.data.password}} | base64 -d
+            mute: true
+            setVariables:
+              - name: DB_PASSWORD
+                sensitive: true
+

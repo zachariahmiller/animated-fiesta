@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: nats
+  description: "UDS Nats Package"
+  # x-release-please-start-version
+  version: "2.10.11-uds.0"
+  # x-release-please-end
+
+variables:
+  - name: DOMAIN
+    default: "uds.dev"
+
+
+components:
+  - name: nats
+    required: true
+    description: "Deploy Nats upstream flavor"
+    import:
+      path: common
+    only:
+      flavor: upstream
+    charts:
+      - name: nats
+        valuesFiles:
+          - values/upstream-values.yaml
+    images:
+      - docker.io/bitnami/nats:2.10.11
+      - docker.io/bitnami/nats-exporter:0.15.0
+
+  - name: nats
+    required: true
+    description: "Deploy Nats registry1 flavor"
+    import:
+      path: common
+    only:
+      flavor: registry1
+      cluster:
+        architecture: amd64
+    charts:
+      - name: nats
+        valuesFiles:
+          - values/registry1-values.yaml
+    images:
+      - registry1.dso.mil/ironbank/opensource/synadia/nats-server:v2.10.11

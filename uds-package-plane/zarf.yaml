@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: plane
+  description: "UDS Plane Package"
+  # x-release-please-start-version
+  version: "0.21.0-uds.0"
+  # x-release-please-end
+
+variables:
+  - name: DOMAIN
+    default: "uds.dev"
+
+
+components:
+  - name: plane
+    required: true
+    description: "Deploy Plane upstream flavor"
+    import:
+      path: common
+    only:
+      flavor: upstream
+    charts:
+      - name: plane-ce
+        valuesFiles:
+          - values/upstream-values.yaml
+    images:
+      - busybox
+      - makeplane/plane-admin:stable
+      - makeplane/plane-backend:stable
+      - makeplane/plane-frontend:stable
+      - makeplane/plane-space:stable
+      - minio/mc
+      - minio/minio:latest
+      - postgres:15.5-alpine
+      - redis:7.2.4-alpine
+
+  - name: plane
+    required: true
+    description: "Deploy Plane registry1 flavor"
+    import:
+      path: common
+    only:
+      flavor: registry1
+      cluster:
+        architecture: amd64
+    charts:
+      - name: plane-ce
+        valuesFiles:
+          - values/registry1-values.yaml
+    images:
+      - registry1.dso.mil/ironbank/opensource/synadia/plane-server:v2.10.11

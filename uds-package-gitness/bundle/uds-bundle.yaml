@@ -1,0 +1,38 @@
+kind: UDSBundle
+metadata:
+  name: uds-package-gitness-test
+  description: A UDS bundle for deploying uds-package-gitness and it's dependencies on a development cluster
+  # x-release-please-start-version
+  version: v3.0.0-beta.7
+  # x-release-please-end
+
+packages:
+  - name: dev-namespace
+    path: ../
+    ref: 0.1.0
+
+  - name: postgres-operator
+    repository: ghcr.io/defenseunicorns/packages/uds/postgres-operator
+    ref: 1.11.0-uds.0-upstream
+    overrides:
+      postgres-operator:
+        uds-postgres-config:
+          variables:
+            - name: POSTGRESQL
+              description: "Configure postgres using CRs via the uds-postgres-config chart"
+              path: postgresql
+
+  - name: dev-secrets
+    path: ../
+    ref: 0.1.0
+    exports:
+      - name: DB_PASSWORD
+
+  - name: gitness
+    path: ../
+    # x-release-please-start-version
+    ref: v3.0.0-beta.7
+    # x-release-please-end
+    imports:
+      - name: DB_PASSWORD
+        package: dev-secrets

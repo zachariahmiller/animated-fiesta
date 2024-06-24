@@ -1,0 +1,4 @@
+# image:
+#   registry: registry1.dso.mil
+#   repository: ironbank/opensource/synadia/nats-server
+#   tag: v2.10.11

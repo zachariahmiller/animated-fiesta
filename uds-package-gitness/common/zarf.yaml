@@ -1,0 +1,20 @@
+kind: ZarfPackageConfig
+metadata:
+  name: uds-gitness-common
+  description: "UDS Gitness Common"
+  url: "https://gitness.com/"
+
+components:
+  - name: gitness
+    charts:
+      - name: uds-gitness-config
+        namespace: gitness
+        version: 0.1.0
+        localPath: ../chart
+      - name: gitness
+        version: v3.0.0-beta.7
+        url: https://github.com/harness/gitness.git
+        gitPath: charts/gitness
+        namespace: gitness
+        valuesFiles:
+          - "../values/common-values.yaml"

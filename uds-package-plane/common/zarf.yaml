@@ -1,0 +1,19 @@
+kind: ZarfPackageConfig
+metadata:
+  name: plane
+  url: https://helm.plane.so/makeplane/plane-ce
+  authors: The UDS Authors
+components:
+  - name: plane
+    charts:
+    - name: uds-config
+      version: 0.1.0
+      localPath: ../chart
+      namespace: plane
+    - name: plane-ce
+      version: 1.0.19
+      url: https://helm.plane.so/
+      gitPath: makeplane/plane-ce
+      namespace: plane
+      valuesFiles:
+      - ../values/common-values.yaml

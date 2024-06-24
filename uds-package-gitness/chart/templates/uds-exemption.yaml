@@ -1,0 +1,14 @@
+apiVersion: uds.dev/v1alpha1
+kind: Exemption
+metadata:
+  name: gitness-grossness
+  namespace: uds-policy-exemptions
+spec:
+  exemptions:
+    - policies:
+        - DisallowPrivileged
+        - RequireNonRootUser
+      matcher:
+        namespace: gitness
+        name: "^gitness*"
+      title: "gitness-grossness"

@@ -1,0 +1,17 @@
+kind: ZarfPackageConfig
+metadata:
+  name: nats
+  url: oci://registry-1.docker.io/bitnamicharts/nats
+  authors: The UDS Authors
+
+components:
+  - name: nats
+    charts:
+    - name: uds-config
+      version: 0.1.0
+      localPath: ../chart
+      namespace: nats
+    - name: nats
+      version: 8.2.8
+      url: oci://registry-1.docker.io/bitnamicharts/nats
+      namespace: nats

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/v0.33.0/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: gitness
+  description: auto-generated using `zarf dev generate`
+  version: v3.0.0-beta.7
+  url: "https://gitness.com/"
+
+variables:
+  - name: DB_PASSWORD
+    description: "Database Password for Mattermost"
+
+components:
+  - name: gitness
+    required: true
+    only:
+      flavor: upstream
+    import:
+      path: common
+    images:
+      - docker:24.0.3-dind
+      - harness/gitness:latest
+      - alpine:3.19.1

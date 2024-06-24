@@ -1,0 +1,10 @@
+postgres:
+  local_setup: false
+redis:
+  local_setup: false
+minio:
+  local_setup: false
+env:
+  pgdb_remote_url:
+  pgdb_username: plane.plane
+  pgdb_password: plane

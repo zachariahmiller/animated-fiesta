@@ -1,0 +1,17 @@
+kind: UDSBundle
+metadata:
+  name: nats-test
+  description: A UDS bundle for deploying Nats and it's dependencies on a development cluster
+  # x-release-please-start-version
+  version: 2.10.11-uds.0
+  # x-release-please-end
+
+packages:
+
+
+  - name: nats
+    path: ../
+    # x-release-please-start-version
+    ref: 2.10.11-uds.0
+    # x-release-please-end
+
