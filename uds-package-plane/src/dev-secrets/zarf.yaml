@@ -31,10 +31,20 @@ components:
             setVariables:
               - name: REDIS_PASSWORD
                 sensitive: true
-  - name: gitlab-redis
+  - name: plane-redis
     required: true
     manifests:
       - name: plane-redis
         namespace: plane
         files:
           - redis-secret.yaml
+  - name: postgres-password
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: ./zarf tools kubectl get secret -n plane plane.plane.pg-cluster.credentials.postgresql.acid.zalan.do --template='{{ index .data "password" }}' | base64 -d
+            mute: true
+            setVariables:
+              - name: POSTGRES_PASSWORD
+                sensitive: true

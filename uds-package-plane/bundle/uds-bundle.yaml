@@ -48,21 +48,38 @@ packages:
     ref: 0.1.0
     exports:
       - name: POSTGRES_PASSWORD
-      
+      - name: ACCESS_KEY
+      - name: SECRET_KEY
   - name: plane
     path: ../
     # x-release-please-start-version
     ref: 0.21.0-uds.0
     # x-release-please-end
-    # imports:
-    #   - name: ACCESS_KEY
-    #     package: dev-secrets
-    #   - name: SECRET_KEY
-    #     package: dev-secrets
+    imports:
+      - name: ACCESS_KEY
+        package: dev-secrets
+      - name: SECRET_KEY
+        package: dev-secrets
+      - name: POSTGRES_PASSWORD
+        package: dev-secrets
     overrides:
       plane:
         plane-ce:
           values:
             - path: "env.pgdb_remote_url"
-              value: "postgres.postgresql.svc.cluster.local:5432"
+              value: "postgres://plane.plane:${POSTGRES_PASSWORD}@pg-cluster.postgres.svc.cluster.local:5432/plane"
+            - path: "env.aws_s3_endpoint_url"
+              value: "minio.dev-minio.svc.cluster.local:9000"
+            - path: "env.docstore_bucket"
+              value: "uds-plane-uploads"
+            - path: "env.remote_redis_url"
+              value: "redis://redis-master.dev-redis.svc.cluster.local:6379"
+            - path: "env.aws_access_key"
+              value: ${ACCESS_KEY}
+            - path: "env.aws_secret_access_key"
+              value: ${SECRET_KEY}
+            - path: "env.pgdb_password"
+              value: ${POSTGRES_PASSWORD}
+            - path: "env.pgdb_name"
+              value: "plane"
 # hopefully we can rewrite this config map withthe correct values https://github.com/makeplane/helm-charts/blob/d095f17643665d8bc84d3f1f698066d8a26f7140/charts/plane-ce/templates/config-secrets/app-env.yaml#L13

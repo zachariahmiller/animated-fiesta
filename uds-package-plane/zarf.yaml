@@ -10,7 +10,9 @@ metadata:
 variables:
   - name: DOMAIN
     default: "uds.dev"
-
+  # - name: POSTGRES_PASSWORD
+  # - name: ACCESS_KEY
+  # - name: SECRET_KEY
 
 components:
   - name: plane
@@ -30,10 +32,10 @@ components:
       - makeplane/plane-backend:stable
       - makeplane/plane-frontend:stable
       - makeplane/plane-space:stable
-      - minio/mc
-      - minio/minio:latest
-      - postgres:15.5-alpine
-      - redis:7.2.4-alpine
+      # - minio/mc
+      # - minio/minio:latest
+      # - postgres:15.5-alpine
+      # - redis:7.2.4-alpine
 
   - name: plane
     required: true
@@ -49,4 +51,4 @@ components:
         valuesFiles:
           - values/registry1-values.yaml
     images:
-      - registry1.dso.mil/ironbank/opensource/synadia/plane-server:v2.10.11
+      - registry1.dso.mil/ironbank/opensource/example/plane-server:v2.10.11

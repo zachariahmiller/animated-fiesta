@@ -16,4 +16,4 @@ components:
       gitPath: makeplane/plane-ce
       namespace: plane
       valuesFiles:
-      - ../values/common-values.yaml
+        - ../values/common-values.yaml

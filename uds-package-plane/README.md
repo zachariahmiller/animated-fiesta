@@ -7,7 +7,8 @@
 ###
 ##
 #
-Needs dependencies (redis, minio, postgres), ingress, monitoring, registry1 images, etc
+Needs dependencies (redis, minio, postgres), vs generation, monitoring, registry1 images, etc
+https://docs.plane.so/self-hosting/methods/kubernetes#custom-ingress-routes
 
 
 [![Latest Release](https://img.shields.io/github/v/release/defenseunicorns/uds-package-plane)](https://github.com/defenseunicorns/uds-package-plane/releases)

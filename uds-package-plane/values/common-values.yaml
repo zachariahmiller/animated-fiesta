@@ -5,6 +5,7 @@ redis:
 minio:
   local_setup: false
 env:
-  pgdb_remote_url:
+  #pgdb_remote_url:
   pgdb_username: plane.plane
-  pgdb_password: plane
+  pgdb_password: ###ZARF_VAR_POSTGRES_PASSWORD###
+  # aws_s3_endpoint_url:

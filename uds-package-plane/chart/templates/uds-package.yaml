@@ -5,7 +5,31 @@ metadata:
   namespace: "plane"
 spec:
   network:
-    expose: []
+    expose: 
+      - service: plane-ce-web
+        selector:
+          app.name: plane-plane-ce-web
+        host: plane
+        gateway: tenant
+        port: 3000
+      # - service: plane-ce-api
+      #   selector:
+      #     app.name: plane-plane-ce-api
+      #   host: plane-api
+      #   gateway: tenant
+      #   port: 3000
+      # - service: plane-ce-space
+      #   selector:
+      #     app.name: plane-plane-ce-space
+      #   host: plane-space
+      #   gateway: tenant
+      #   port: 3000
+      # - service: plane-ce-admin
+      #   selector:
+      #     app.name: plane-plane-ce-admin
+      #   host: plane
+      #   gateway: admin
+      #   port: 3000
     allow:
       - direction: Ingress
         remoteGenerated: IntraNamespace
