@@ -8,7 +8,7 @@ metadata:
 
 variables:
   - name: DB_PASSWORD
-    description: "Database Password for Mattermost"
+    description: "Database Password for gitness"
 
 components:
   - name: gitness
