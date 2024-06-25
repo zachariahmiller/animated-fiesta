@@ -18,6 +18,12 @@ packages:
   - name: dev-redis
     repository: ghcr.io/defenseunicorns/packages/uds/dev-redis
     ref: 0.0.2
+    overrides:
+      redis:
+        redis:
+          values:
+            - path: "auth.enabled"
+              value: false
 
   - name: postgres-operator
     repository: ghcr.io/defenseunicorns/packages/uds/postgres-operator

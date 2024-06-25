@@ -6,34 +6,58 @@ metadata:
 spec:
   network:
     expose: 
-      - service: plane-ce-web
-        selector:
-          app.name: plane-plane-ce-web
-        host: plane
-        gateway: tenant
-        port: 3000
-      # - service: plane-ce-api
-      #   selector:
-      #     app.name: plane-plane-ce-api
-      #   host: plane-api
-      #   gateway: tenant
-      #   port: 3000
-      # - service: plane-ce-space
-      #   selector:
-      #     app.name: plane-plane-ce-space
-      #   host: plane-space
-      #   gateway: tenant
-      #   port: 3000
-      # - service: plane-ce-admin
-      #   selector:
-      #     app.name: plane-plane-ce-admin
-      #   host: plane
-      #   gateway: admin
-      #   port: 3000
+    - description: Web Service
+      gateway: tenant
+      host: plane
+      match:
+      - name: Root Path
+        uri:
+          regex: ^/.*$
+      port: 3000
+      selector:
+        app.name: plane-plane-ce-web
+      service: plane-ce-web
+    - description: Space Service
+      gateway: tenant
+      host: plane
+      match:
+      - name: Spaces Path
+        uri:
+          regex: ^/spaces/.*$
+      port: 3000
+      selector:
+        app.name: plane-plane-ce-web
+      service: plane-ce-space
+    - description: Admin Service
+      gateway: tenant
+      host: plane
+      match:
+      - name: Admin Path
+        uri:
+          regex: ^/god-mode/.*$
+      port: 3000
+      selector:
+        app.name: plane-plane-ce-admin
+      service: plane-ce-admin
+    - description: API Service
+      gateway: tenant
+      host: plane
+      match:
+      - name: API Path
+        uri:
+          regex: ^/api/.*$
+      - name: Auth Path
+        uri:
+          regex: ^/auth/.*$
+      port: 8000
+      selector:
+        app.name: plane-plane-ce-api
+      service: plane-ce-api
     allow:
       - direction: Ingress
         remoteGenerated: IntraNamespace
       - direction: Egress
         remoteGenerated: IntraNamespace
+      # For postgres and minio to get things working
       - direction: Egress
         remoteGenerated: Anywhere

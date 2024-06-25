@@ -1,14 +1,7 @@
 # 🏭 UDS Plane Package
 
 ##TODO##
-######
-#####
-####
-###
-##
-#
-Needs dependencies (redis, minio, postgres), vs generation, monitoring, registry1 images, etc
-https://docs.plane.so/self-hosting/methods/kubernetes#custom-ingress-routes
+Needs monitoring, redis (switch to valkey) with auth (vs no auth currently), fix minio connectivity, narrow down netpols more, add sso. 
 
 
 [![Latest Release](https://img.shields.io/github/v/release/defenseunicorns/uds-package-plane)](https://github.com/defenseunicorns/uds-package-plane/releases)
@@ -19,7 +12,7 @@ This package is designed for use as part of a bundle deployed on [UDS Core](http
 
 ## Prerequisites
 
-Plane requires a postgres database. Wiring coder to your dependencies is done primarily via helm values, which will require the use of a bundle created with uds-cli.
+Plane requires a postgres database, object storage and redis. Wiring plane to your dependencies is done primarily via helm values, which will require the use of a bundle created with uds-cli.
 
 ## Flavors
 
